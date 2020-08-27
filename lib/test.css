@@ -1,1 +1,21 @@
-.tb-page__body{content:'.tb-page__body'}.tb-page--default{content:'.tb-page--default'}.tb-page--default .tb-page__body{content:'.tb-page--default .tb-page__body'}
+/* BEM support Func
+ -------------------------- */
+/* BEM
+ -------------------------- */
+.tb-page__body {
+    content: '.tb-page__body';
+}
+
+.tb-page .tb-page__body {
+    content: 'abc';
+}
+
+.tb-page--default {
+    content: '.tb-page--default';
+}
+.tb-page--default .tb-page__body {
+    content: '.tb-page--default .tb-page__body';
+}
+.tb-page--default .tb-page__body--default {
+    content: '.tb-page--default .tb-page__body--default';
+}
