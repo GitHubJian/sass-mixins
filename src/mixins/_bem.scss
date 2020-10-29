@@ -1,8 +1,7 @@
 @import '../common/config';
-@import './function';
+@import '../common/var';
+@import '../functions/index';
 
-/* BEM
- -------------------------- */
 @mixin b($block) {
     $B: $namespace + '-' + $block !global;
 
@@ -15,13 +14,9 @@
     $E: $element !global;
     $selector: &;
     $currentSelector: '';
+
     @each $unit in $element {
-        $currentSelector: #{$currentSelector +
-            '.' +
-            $B +
-            $element-separator +
-            $unit +
-            ','};
+        $currentSelector: #{$currentSelector + '.' + $B + $element-separator + $unit + ','};
     }
 
     @if hitAllSpecialNestRule($selector) {
@@ -44,12 +39,9 @@
 @mixin m($modifier) {
     $selector: &;
     $currentSelector: '';
+
     @each $unit in $modifier {
-        $currentSelector: #{$currentSelector +
-            & +
-            $modifier-separator +
-            $unit +
-            ','};
+        $currentSelector: #{$currentSelector + & + $modifier-separator + $unit + ','};
     }
 
     @at-root {
@@ -76,12 +68,7 @@
     }
 }
 
-@mixin spec-selector(
-    $specSelector: '',
-    $element: $E,
-    $modifier: false,
-    $block: $B
-) {
+@mixin spec-selector($specSelector: '', $element: $E, $modifier: false, $block: $B) {
     $modifierCombo: '';
 
     @if $modifier {
@@ -89,10 +76,7 @@
     }
 
     @at-root {
-        #{&}#{$specSelector}.#{$block
-            + $element-separator
-            + $element
-            + $modifierCombo} {
+        #{&}#{$specSelector}.#{$block + $element-separator + $element + $modifierCombo} {
             @content;
         }
     }
@@ -120,5 +104,11 @@
         &.#{$state-prefix + $state} {
             @content;
         }
+    }
+}
+
+@mixin pseudo($pseudo) {
+    @at-root #{&}#{':#{$pseudo}'} {
+        @content;
     }
 }
